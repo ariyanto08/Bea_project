@@ -1,13 +1,13 @@
 <?php
 
-// namespace App\Http\Controllers;
+namespace App\Http\Controllers;
 // use App\Models\User;
 
-// class AUserController extends Controller{
-//     function index(){
-//         $data['list_user'] = User::all();
-//         return view('admin.user.index',$data);
-//     }
+class AksesUserController extends Controller{
+    function index(){
+        // $data['list_user'] = User::all();
+        return view('super-admin.user.index');
+    }
 //     function create(){
 //         return view('admin.user.create');
 //     }
@@ -44,4 +44,4 @@
 //         return redirect('master-data/user')->with('danger', 'Haudahh Data Ilang!!');
 //     }
 
-// }
+}

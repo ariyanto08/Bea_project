@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AksesUserController;
 use App\Http\Controllers\SuperAdminController;
 // use App\Http\Controllers\AksesUserController;
 
@@ -20,6 +21,8 @@ Route::get('/', function () {
 });
 
 Route::get('dashboard', [SuperAdminController::class,'showDashboard']);
-Route::get('akses', [SuperAdminController::class,'showAkses']);
 Route::get('inbox', [SuperAdminController::class,'showInbox']);
+
+
+Route::get('user', [AksesUserController::class,'Index']);
 

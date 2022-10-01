@@ -22,7 +22,7 @@ function checkRouteActive($route)
                     <li><a href="app-inbox.html"><i class="fa fa-envelope-open"></i>Messages</a></li>
                     <li><a href="javascript:void(0);"><i class="fa fa-gear"></i>Settings</a></li>
                     <li class="divider"></li>
-                    <li><a href="page-login.html"><i class="fa fa-power"></i>Logout</a></li>
+                    <li><a href="page-login.html"><i class="fa fa-power-off"></i>Logout</a></li>
                 </ul>
             </div>
             <hr>
@@ -48,8 +48,11 @@ function checkRouteActive($route)
                     <li class="nav-item {{checkRouteActive('dashboard')}}">
                         <a class="nav-link" href="{{ url('dashboard') }}"><i class="fa fa-dashboard"></i>Dashboard</a>
                     </li>
-                    <li class="nav-item {{checkRouteActive('akses')}}">
-                        <a class="nav-link" href="{{ url('akses') }}"><i class="fa fa-th-large"></i>Akses User</a>
+                    <li class="nav-item {{checkRouteActive('#')}}">
+                        <a class="nav-link" href="{{ url('#') }}"><i class="fa fa-th-large"></i>Request</a>
+                    </li>
+                    <li class="nav-item {{checkRouteActive('user')}}">
+                        <a class="nav-link" href="{{ url('user') }}"><i class="fa fa-th-large"></i>Akses User</a>
                     </li>
                 </ul>
             </nav>
