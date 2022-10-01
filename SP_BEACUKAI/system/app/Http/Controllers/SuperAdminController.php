@@ -12,4 +12,8 @@ class SuperAdminController extends Controller{
         return view('super-admin.menu.akses');
     }
 
+    function showInbox(){
+        return view('super-admin.menu.inbox');
+    }
+
 }

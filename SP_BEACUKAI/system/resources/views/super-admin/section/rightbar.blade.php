@@ -1,6 +1,6 @@
 <div class="right_icon_bar">
     <ul>
-        <li><a href="app-inbox.html"><i class="fa fa-envelope"></i></a></li>
+        <li><a href="{{url('inbox')}}"><i class="fa fa-envelope"></i></a></li>
         <li><a href="app-chat.html"><i class="fa fa-comments"></i></a></li>
         <li><a href="app-calendar.html"><i class="fa fa-calendar"></i></a></li>
         <li><a href="file-dashboard.html"><i class="fa fa-folder"></i></a></li>

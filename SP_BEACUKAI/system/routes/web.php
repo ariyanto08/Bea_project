@@ -20,6 +20,6 @@ Route::get('/', function () {
 });
 
 Route::get('dashboard', [SuperAdminController::class,'showDashboard']);
-
 Route::get('akses', [SuperAdminController::class,'showAkses']);
+Route::get('inbox', [SuperAdminController::class,'showInbox']);
 
