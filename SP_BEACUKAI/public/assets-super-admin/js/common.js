@@ -1,11 +1,11 @@
 $(function() {
 	"use strict";
-	initSparkline();
-	skinChanger();    
+	skinChanger();
+    initSparkline();
     
     setTimeout(function() {
         $('.page-loader-wrapper').fadeOut();
-    }, 5);
+    }, 50);
 });
 
 // Sparkline
@@ -19,22 +19,45 @@ function initSparkline() {
 //Skin changer
 function skinChanger() {
 	$('.choose-skin li').on('click', function() {
-	    var $themes = $('#wrapper');
+	    var $body = $('body');
 	    var $this = $(this);
   
 	    var existTheme = $('.choose-skin li.active').data('theme');
 	    $('.choose-skin li').removeClass('active');
-	    $themes.removeClass('theme-' + existTheme);
+	    $body.removeClass('theme-' + existTheme);
 	    $this.addClass('active');
-	    $themes.addClass('theme-' + $this.data('theme'));
+	    $body.addClass('theme-' + $this.data('theme'));
 	});
 }
 
-// custom js 
 $(document).ready(function() {
 
 	// sidebar navigation
 	$('.sidebar').metisMenu();
+
+	// sidebar nav scrolling
+	$('#left-sidebar .sidebar-scroll').slimScroll({
+		height: 'calc(100vh - 65px)',
+		wheelStep: 10,
+		touchScrollStep: 50,
+		color: '#efefef',
+		size: '2px',
+		borderRadius: '3px',
+		alwaysVisible: false,
+		position: 'right',
+	});
+
+	// cwidget scroll
+	$('.cwidget-scroll').slimScroll({
+		height: '263px',
+		wheelStep: 10,
+		touchScrollStep: 50,
+		color: '#efefef',
+		size: '2px',
+		borderRadius: '3px',
+		alwaysVisible: false,
+		position: 'right',
+	});
 
 	// toggle fullwidth layout
 	$('.btn-toggle-fullwidth').on('click', function() {
@@ -53,30 +76,8 @@ $(document).ready(function() {
 		$('body').toggleClass('offcanvas-active');
 	});
 
-	$('.right_setting').on('click', function() {
-		$('.setting_div').toggleClass('open');
-	});
-
-	// off-canvas menu toggle
-	$('.btn-toggle-offcanvas').on('click', function() {
-		$('.sidebar').toggleClass('open');
-	});
-	
-	// RTL version
-    $(".theme-rtl input").on('change',function() {
-        if(this.checked) {
-            $("body").addClass('rtl_mode');
-        }else{
-            $("body").removeClass('rtl_mode');
-        }
-    });
-
 	$('#main-content').on('click', function() {
 		$('body').removeClass('offcanvas-active');
-	});
-
-	$('.right_icon_btn').on('click', function() {
-		$('body').toggleClass('right_icon_toggle');
 	});
 
 	// adding effect dropdown menu
@@ -122,54 +123,14 @@ $(document).ready(function() {
 	});
 
 	$(window).on('load resize', function() {
-		if($(window).innerWidth() < 1280) {
-			$('body').addClass('layout-fullwidth sidebar_toggle');
+		if($(window).innerWidth() < 420) {
+			$('.navbar-brand logo.svg').attr('src', 'assets/images/logo-icon.svg');
 		} else {
-			$('body').removeClass('layout-fullwidth sidebar_toggle');
+			$('.navbar-brand logo-icon.svg').attr('src', 'assets/images/logo.svg');
 		}
 	});
+
 });
-
-
-// light and dark theme setting js
-var toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
-var toggleHcSwitch = document.querySelector('.theme-high-contrast input[type="checkbox"]');
-var currentTheme = localStorage.getItem('theme');
-if (currentTheme) {
-    document.documentElement.setAttribute('data-theme', currentTheme);
-  
-    if (currentTheme === 'dark') {
-        toggleSwitch.checked = true;
-	}
-	if (currentTheme === 'high-contrast') {
-		toggleHcSwitch.checked = true;
-		toggleSwitch.checked = false;
-    }
-}
-function switchTheme(e) {
-    if (e.target.checked) {
-        document.documentElement.setAttribute('data-theme', 'dark');
-		localStorage.setItem('theme', 'dark');
-		$('.theme-high-contrast input[type="checkbox"]').prop("checked", false);
-    }
-    else {        
-		document.documentElement.setAttribute('data-theme', 'light');
-		localStorage.setItem('theme', 'light');
-    }    
-}
-function switchHc(e) {
-	if (e.target.checked) {
-        document.documentElement.setAttribute('data-theme', 'high-contrast');
-		localStorage.setItem('theme', 'high-contrast');
-		$('.theme-switch input[type="checkbox"]').prop("checked", false);
-    }
-    else {        
-		document.documentElement.setAttribute('data-theme', 'light');
-		localStorage.setItem('theme', 'light');
-    }  
-}
-toggleSwitch.addEventListener('change', switchTheme, false);
-toggleHcSwitch.addEventListener('change', switchHc, false);
 
 // toggle function
 $.fn.clickToggle = function( f1, f2 ) {
@@ -185,6 +146,7 @@ $.fn.clickToggle = function( f1, f2 ) {
 			return f1.apply(this, arguments);
 		});
 	});
+
 };
 
 // Select all checkbox
@@ -194,71 +156,17 @@ $('.select-all').on('click',function(){
 		$(this).parents('table').find('.checkbox-tick').each(function(){
 		this.checked = true;
 		});
-		}else{
-			$(this).parents('table').find('.checkbox-tick').each(function(){
-			this.checked = false;
+	}else{
+		$(this).parents('table').find('.checkbox-tick').each(function(){
+		this.checked = false;
 		});
 	}
-});
+	});
 
-$('.checkbox-tick').on('click',function(){
+	$('.checkbox-tick').on('click',function(){   
 	if($(this).parents('table').find('.checkbox-tick:checked').length == $(this).parents('table').find('.checkbox-tick').length){
 		$(this).parents('table').find('.select-all').prop('checked',true);
 	}else{
 		$(this).parents('table').find('.select-all').prop('checked',false);
 	}
 });
-
-// Font Setting and icon
-$(document).ready(function() {
-	"use strict";
-	// Font Setting 
-	$('.font_setting input:radio').click(function () {
-		var others = $("[name='" + this.name + "']").map(function () {
-			return this.value
-		}).get().join(" ")
-		console.log(others)
-		$('body').removeClass(others).addClass(this.value)
-	});  
-});
-
-window.Iconic= {
-	colors: {
-
-		'theme-dark1': '#343a40',
-		'theme-dark2': '#636d76',
-		'theme-dark3': '#939697',
-		'theme-dark4': '#c7c7c7',
-		'theme-dark5': '#1c1818',
-
-
-		'theme-cyan1': '#59c4bc',
-		'theme-cyan2': '#637aae',
-		'theme-cyan3': '#2faaa1',
-		'theme-cyan4': '#4cc5bc',
-		'theme-cyan5': '#89bab7',
-
-		'theme-purple1': '#7954ad',
-		'theme-purple2': '#e76886',
-		'theme-purple3': '#782fdf',
-		'theme-purple4': '#a06ee8',
-		'theme-purple5': '#a390be',
-
-		'theme-orange1': '#FFA901',
-		'theme-orange2': '#600489',
-		'theme-orange3': '#FF7F00',
-		'theme-orange4': '#FBC200',
-		'theme-orange5': '#38C172',
-	},
-};
-
-// Wraptheme Website live
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/5c6d4867f324050cfe342c69/default';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();

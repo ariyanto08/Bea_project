@@ -1,124 +1,65 @@
 $(function() {
-    "use strict";
+
+    Jknob();
+
+    // progress bars
+    $('.progress .progress-bar').progressbar({
+            display_text: 'none'
+    });
+
+
+    // top products
+    var dataStackedBar = {
+            labels: ['Q1','Q2','Q3','Q4','Q5'],
+            series: [
+                [2350,3205,4520,2351,5632],
+                [2541,2583,1592,2674,2323],
+                [1212,5214,2325,4235,2519],
+            ]
+    };
+    new Chartist.Bar('#chart-top-products', dataStackedBar, {
+            height: "250px",
+            stackBars: true,
+            axisX: {
+                showGrid: false
+            },
+            axisY: {
+                labelInterpolationFnc: function(value) {
+                    return (value / 1000) + 'k';
+                }
+            },
+            plugins: [
+                Chartist.plugins.tooltip({
+                    appendToBody: true
+                }),
+                Chartist.plugins.legend({
+                    legendNames: ['Mobile', 'Laptop', 'Computer']
+                })
+            ]
+    }).on('draw', function(data) {
+            if (data.type === 'bar') {
+                data.element.attr({
+                    style: 'stroke-width: 40px'
+                });
+            }
+    });
+
 
     // notification popup
     toastr.options.closeButton = true;
-    toastr.options.positionClass = 'toast-bottom-right';
+    toastr.options.positionClass = 'toast-top-right';
     toastr.options.showDuration = 1000;
-    toastr['info']('Hello, Welcome Operator, Have a nice day.');
+    toastr['info']('Hello, welcome to Iconic, a unique admin Template.');
 
-    // Google Analytics Dashboard
-    $(document).ready(function(){
-        var chart = c3.generate({
-            bindto: '#Google-Analytics-Dashboard', // id of chart wrapper
-            data: {
-                columns: [
-                    // each columns data
-                    ['data1', 11, 8, 22, 18, 19, 6, 17, 11, 17, 32, 9, 12],
-                    ['data2', 7, 7, 5, 7, 9, 12, 8, 22, 18, 19, 6, 17]
-                ],
-                type: 'bar', // default type of chart
-                colors: {
-                    'data1': Iconic.colors["theme-cyan1"],
-                    'data2': Iconic.colors["theme-cyan2"]
-                },
-                names: {
-                    // name of each serie
-                    'data1': '2019',
-                    'data2': '2020'
-                }
-            },
-            axis: {
-                x: {
-                    type: 'category',
-                    // name of each category
-                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
-                },
-            },
-            bar: {
-                width: 20
-            },
-            legend: {
-                show: false, //hide legend
-            },
-            padding: {
-                left: 0,
-                right: 0,
-                bottom: 0,
-                top: 0
-            },
-        });
-    });
-
-    //  Use by Device
-    $(document).ready(function(){
-        var chart = c3.generate({
-            bindto: '#Use-by-Device', // id of chart wrapper
-            data: {
-                columns: [
-                    // each columns data
-                    ['data1', 50],
-                    ['data2', 35],
-                    ['data3', 15],
-                ],
-                type: 'donut', // default type of chart
-                colors: {
-                    'data1': Iconic.colors["theme-cyan1"],
-                    'data2': Iconic.colors["theme-cyan2"],
-                    'data3': Iconic.colors["theme-cyan3"]
-                },
-                names: {
-                    // name of each serie
-                    'data1': 'Desktop',
-                    'data2': 'Mobile',
-                    'data3': 'Tablet',
-                }
-            },
-            axis: {
-            },
-            legend: {
-                show: true, //hide legend
-            },
-            padding: {
-                bottom: 0,
-                top: 0
-            },
-        });
-    });
-
-    // Use by Audience
-    $(document).ready(function(){
-        var chart = c3.generate({
-            bindto: '#Use-by-Audience', // id of chart wrapper
-            data: {
-                columns: [
-                    // each columns data
-                    ['data1', 55],
-                    ['data2', 30],
-                    ['data3', 20],
-                ],
-                type: 'donut', // default type of chart
-                colors: {
-                    'data1': Iconic.colors["theme-purple1"],
-                    'data2': Iconic.colors["theme-purple2"],
-                    'data3': Iconic.colors["theme-purple3"]
-                },
-                names: {
-                    // name of each serie
-                    'data1': 'Male',
-                    'data2': 'Female',
-                    'data3': 'Other',
-                }
-            },
-            axis: {
-            },
-            legend: {
-                show: true, //hide legend
-            },
-            padding: {
-                bottom: 0,
-                top: 0
-            },
-        });
-    });
 });
+
+function Jknob() {
+    $('.knob').knob({
+        draw: function() {
+            this.i.css({
+                'margin-right': '-' + ((this.w * 3 / 4 + 2) >> 0) + 'px',
+                'margin-left': 'auto'
+            });
+        }
+    });
+}
