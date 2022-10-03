@@ -1,9 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AksesUserController;
-use App\Http\Controllers\SuperAdminController;
-// use App\Http\Controllers\AksesUserController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,9 +19,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('dashboard', [SuperAdminController::class,'showDashboard']);
-Route::get('inbox', [SuperAdminController::class,'showInbox']);
+Route::get('dashboard', [HomeController::class,'showDashboard']);
 
+Route::get('user', [UserController::class,'index']);
 
-Route::get('user', [AksesUserController::class,'Index']);
 
